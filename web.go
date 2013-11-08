@@ -108,6 +108,7 @@ func handleTemplate(prefix, name string, data templateData) {
 func ListenAndServe(address string) {
 	fs := longExpire(http.FileServer(http.Dir(path.Join(Root, "static/"))))
 	http.Handle("/"+pkg.Version+"/", fs)
+	http.Handle("/ubuntu/", http.FileServer(http.Dir(path.Join(Root, "static/"))))
 
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		if req.URL.Path == "/" {
