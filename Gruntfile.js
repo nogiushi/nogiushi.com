@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 			cwd: '.'
                     }
 		},
-		command: 'go install -v ./...'
+		command: 'go install -v .'
             }
 	},
         clean: {

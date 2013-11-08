@@ -120,6 +120,8 @@ func ListenAndServe(address string) {
 		}
 	})
 
+	handleTemplate("/marvin/", "marvin", nil)
+
 	err := http.ListenAndServe(address, nil)
 	if err != nil {
 		log.Print("ListenAndServe:", err)
