@@ -36,7 +36,7 @@ module.exports = function(grunt) {
             },
             nogiushi: {
                 src: ['bower_components/jquery/jquery.min.js', 'bower_components/bootstrap/dist/js/bootstrap.min.js'],
-                dest: 'static/<%= bower.version %>/js/<%= bower.name %>.js'
+                dest: 'dist/static/js/<%= bower.name %>.js'
             }
         },
         uglify: {
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
             },
             nogiushi: {
                 files: {
-                    'static/<%= bower.version %>/js/<%= bower.name %>.min.js': ['<%= concat.nogiushi.dest %>']
+                    'dist/static/js/<%= bower.name %>.min.js': ['<%= concat.nogiushi.dest %>']
                 }
             }
         },
@@ -70,10 +70,10 @@ module.exports = function(grunt) {
                     sourceMap: true,
                     outputSourceFiles: true,
                     sourceMapURL: '<%= pkg.name %>.css.map',
-                    sourceMapFilename: 'dist/css/<%= pkg.name %>.css.map'
+                    sourceMapFilename: 'dist/static/css/<%= pkg.name %>.css.map'
                 },
                 files: {
-                    'static/<%= bower.version %>/css/<%= bower.name %>.css': ['less/<%= pkg.name %>.less']
+                    'dist/static/css/<%= bower.name %>.css': ['less/<%= pkg.name %>.less']
                 }
             },
             compileTheme: {
@@ -82,10 +82,10 @@ module.exports = function(grunt) {
                     sourceMap: true,
                     outputSourceFiles: true,
                     sourceMapURL: '<%= pkg.name %>-theme.css.map',
-                    sourceMapFilename: 'dist/css/<%= pkg.name %>-theme.css.map'
+                    sourceMapFilename: 'dist/static/css/<%= pkg.name %>-theme.css.map'
                 },
                 files: {
-                    'dist/css/<%= pkg.name %>-theme.css': 'less/theme.less'
+                    'dist/static/css/<%= pkg.name %>-theme.css': 'less/theme.less'
                 }
             },
             minify: {
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
                     report: 'min'
                 },
                 files: {
-                    'static/<%= bower.version %>/css/<%= bower.name %>.min.css': 'static/<%= bower.version %>/css/<%= bower.name %>.css'
+                    'dist/static/css/<%= bower.name %>.min.css': 'dist/static/css/<%= bower.name %>.css'
                 }
             }
         },
@@ -103,15 +103,37 @@ module.exports = function(grunt) {
                 files: [
                     {
                         src: 'images/*',
-                        dest: 'static/<%= bower.version %>/'
+                        dest: 'dist/static/'
+                    },
+                    {
+                        src: ['templates/*', 'recipes', 'pages.json'],
+                        dest: 'dist/'
                     },
                     {
 			expand: true,
 			cwd: 'bower_components/bootstrap/dist/',
                         src: ['fonts/*'],
-                        dest: 'static/<%= bower.version %>/'
+                        dest: 'dist/static/'
                     }
                 ]
+            }
+        },
+        hashres: {
+            // Global options
+            options: {
+                encoding: 'utf8',
+                fileNameFormat: '${hash}~${name}.${ext}',
+                renameFiles: true
+            },
+            prod: {
+                options: {
+                },
+                // Files to hash
+                src: [
+                    // WARNING: These files will be renamed!
+                    'dist/static/**/*.*', '!dist/static/**/*~*.*', '!dist/static/robots.txt', '!dist/static/favicon.ico'],
+                // File that refers to above files and needs to be updated with the hashed name
+                dest: ['dist/templates/*.html', 'dist/recipes', 'dist/pages.json']
             }
         }
     });
@@ -134,6 +156,6 @@ module.exports = function(grunt) {
     grunt.registerTask('static', ['clean', 'static-css', 'static-js', 'static-images']);
 
     // Default task.
-    grunt.registerTask('default', ['shell', 'test', 'static']);
+    grunt.registerTask('default', ['shell', 'test', 'static', 'hashres']);
 
 };

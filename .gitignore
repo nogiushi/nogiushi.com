@@ -24,4 +24,4 @@ _testmain.go
 bower_components
 node_modules
 build
-static
+dist
