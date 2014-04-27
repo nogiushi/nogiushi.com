@@ -1,0 +1,22 @@
+[
+    {
+        "URL": "//nogiushi.com/",
+	"Title": "Home",
+        "Description": "",
+	"Photo": "",
+        "Name": "home",
+        "Type": "website",
+        "Static": ""
+    },
+    {
+        "URL": "//nogiushi.com/marvin/",
+	"Title": "Marvin",
+        "Description": "",
+	"Photo": "",
+        "Name": "marvin",
+        "Type": "website",
+        "Static": ""
+    }
+    
+]
+

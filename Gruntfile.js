@@ -156,6 +156,6 @@ module.exports = function(grunt) {
     grunt.registerTask('static', ['clean', 'static-css', 'static-js', 'static-images']);
 
     // Default task.
-    grunt.registerTask('default', ['shell', 'test', 'static', 'hashres']);
+    grunt.registerTask('default', ['shell', 'test', 'static']);
 
 };

@@ -8,52 +8,27 @@ import (
 	"github.com/eikeon/web"
 )
 
-type Resource struct {
-	Route *web.Route
+func GetData(r *web.Resource) web.TemplateData {
+	return r
 }
-
-func GetResource(route *web.Route, vars web.Vars) web.Resource {
-	return &Resource{Route: route}
-}
-
-func (r *Resource) Title() string {
-	return r.Route.Data["Title"]
-}
-
-var Root *string
 
 func main() {
 	Address := flag.String("address", ":9999", "http service address")
-	Host := flag.String("host", "nogiushi.com", "")
-	Root = flag.String("root", "dist", "...")
-
+	Root := flag.String("root", ".", "...")
+	Static := flag.Bool("static", false, "serve static files")
+	Add := flag.Bool("add", false, "add resources in resources.json")
 	flag.Parse()
 
-	web.Root = Root
-
-	getters := web.Getters{
-		"home":   GetResource,
-		"marvin": GetResource,
+	rh := &web.ResourceHandler{Root: http.Dir(*Root), Static: *Static, Aliases: map[string]string{"dev.nogiushi.com": "nogiushi.com"}, GetData: GetData}
+	if *Add {
+		web.AddResources(*Root)
+		//rh.Init("nogiushi-static", "nogiushi.com")
 	}
+	http.Handle("/", rh)
 
-	if h, err := web.Handler(*Host, getters); err == nil {
-		server := &http.Server{Addr: *Address, Handler: h}
-		log.Println("starting server on", server.Addr)
-		if err := server.ListenAndServe(); err != nil {
-			log.Println(err)
-		}
-	} else {
+	server := &http.Server{Addr: *Address}
+	log.Println("starting server on", server.Addr)
+	if err := server.ListenAndServe(); err != nil {
 		log.Println(err)
 	}
-
-	if h, err := web.Handler(*Host, getters); err == nil {
-		server := &http.Server{Addr: *Address, Handler: h}
-		log.Println("starting server on", server.Addr)
-		if err := server.ListenAndServe(); err != nil {
-			log.Println(err)
-		}
-	} else {
-		log.Println(err)
-	}
-
 }
