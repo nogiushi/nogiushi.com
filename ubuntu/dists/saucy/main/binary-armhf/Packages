@@ -1,0 +1,18 @@
+Package: marvin
+Version: 0.9.8-1
+License: unknown
+Vendor: ubuntu@rachael
+Architecture: armhf
+Maintainer: info<info@nogiushi.com>
+Installed-Size: 7963
+Depends: golang (>= 1.1.2)
+Section: home
+Priority: extra
+Homepage: http://nogiushi.com/
+Description: Marvin is ...
+Size: 1606146
+Filename: dists/saucy/main/binary-armhf/marvin-0.9.8-1_armhf.deb
+MD5sum: bfc939a2fbaecd69469d1b295878142b
+SHA1: c7b8bfbd0c3d019989afda1848c8f9c426d3bbb5
+SHA256: 1634b33b646bbb07bec09276c6b0de90e86104807784279830dcee5fba876a28
+

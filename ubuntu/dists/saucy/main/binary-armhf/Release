@@ -1,0 +1,6 @@
+Archive: stable
+Component: main
+Origin: Repository
+Label: Repository
+Architecture: armhf
+Description: Repository for debian saucy

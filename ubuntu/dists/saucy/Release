@@ -1,0 +1,20 @@
+Origin: Repository
+Label: Repository
+Suite: stable
+Codename: saucy
+Date: Sat, 27 Dec 2014 13:31:20 EST
+Architectures: armhf
+Components: main
+Description: Repository for debian
+MD5Sum:
+ 5111b7882d3faddeadcd96bac0bcdcf4 394 main/binary-armhf/Packages.gz
+ 36d28455630dae890e30018423c893a8 506 main/binary-armhf/Packages
+ 505d651a0d2772b1bb7df94dea59e212 130 main/binary-armhf/Release
+SHA1:
+ 4c9f1091400a2ae51a1019679d3ec4869b5f7dd5 394 main/binary-armhf/Packages.gz
+ f1ef230043ce8746f68b516a29a2f6924d15fa72 506 main/binary-armhf/Packages
+ 230cd96b6eae6c1a2b39ea92d89bfcd66d55d046 130 main/binary-armhf/Release
+SHA256:
+ b4ab6dbba286c228951834287325476fe71ad573e8293ea88059df518d2d7a12 394 main/binary-armhf/Packages.gz
+ a97ade883a3734903f38d16cf14d8852d1febb2c63bc3b47dc5b823475dcf3b7 506 main/binary-armhf/Packages
+ d41e1c7c46a220d56a43c92fbb56e8cf1ac02f003262b955a31e564d0348f4c0 130 main/binary-armhf/Release
