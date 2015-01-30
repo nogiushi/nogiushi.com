@@ -4,7 +4,7 @@ var gulp       = require('gulp'),
     imagemin   = require('gulp-imagemin'),
     connect = require('connect'),
     http = require('http'),
-    handler = require('./server'),
+    handler = require('./handler'),
     less = require('gulp-less'),
     path = require('path');
 
@@ -69,4 +69,6 @@ gulp.task('webserver', function() {
     http.createServer(app).listen(3000);
 });
 
-gulp.task('default', ['static', 'webserver', 'watch']);
+gulp.task('default', ['static']);
+
+gulp.task('dev', ['static', 'webserver', 'watch']);

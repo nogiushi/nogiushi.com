@@ -1,31 +1,11 @@
-require('node-jsx').install({extension: '.jsx'});
+var connect = require('connect');
+var http = require('http');
 
-var http = require('http'),
-    send = require('send'),
-    url = require('url'),
-    React = require('react'),
-    App = require('./assets/js/app.jsx');
+var handler = require('./handler.js');
 
-exports = module.exports = function (req, res) {
-    if (req.url == '/' || req.url == '/marvin/') {
-        var path = url.parse(req.url).pathname
-        var content = React.renderToString(React.createElement(App, {path: path}));
-        res.setHeader('Content-Type', 'text/html');        
-        res.end("<!DOCTYPE html>" + content);
-    } else {
-        send(req, url.parse(req.url).pathname, {root: './static'})
-            .on('error', function(err) {
-                res.statusCode = err.status || 500;
-                var path = url.parse(req.url).pathname                
-                var content = React.renderToString(React.createElement(App, {path: path}));
-                res.setHeader('Content-Type', 'text/html');        
-                res.end("<!DOCTYPE html>" + content);
-            })
-            .on('directory', function() {
-                res.statusCode = 301;
-                res.setHeader('Location', req.url + '/');
-                res.end('Redirecting to ' + req.url + '/');
-            })
-            .pipe(res);
-    }
-};
+var app = connect()
+    .use(require('morgan')('dev'))
+    .use(require('serve-static')('public'))
+    .use(handler);
+
+http.createServer(app).listen(3000);
