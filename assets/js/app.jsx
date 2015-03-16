@@ -142,7 +142,7 @@ App = React.createClass({
 	    </a>
 	  </li>
 	</ul>
-	<p>&copy; Nogiushi 2014</p>
+	<p>&copy; Nogiushi 2015</p>
       </div>
     </footer>
     <script src="/site.js"></script>

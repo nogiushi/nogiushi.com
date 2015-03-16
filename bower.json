@@ -1,6 +1,6 @@
 {
   "name": "nogiushi",
   "dependencies": {
-    "bootstrap": "git://github.com/twbs/bootstrap.git#3.3.2"
+    "bootstrap": "git://github.com/twbs/bootstrap.git#3.3.4"
   }
 }
